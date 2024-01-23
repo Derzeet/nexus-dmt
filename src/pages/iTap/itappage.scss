@@ -1,0 +1,13 @@
+.itap-tool-wraper {
+    display: flex;
+    flex-direction: row;
+
+    .left-bar {
+        width: 400px; /* Fixed width */
+        /* Add other styles as needed */
+    }
+    .graph-container {
+        flex-grow: 1; /* Fill the remaining space */
+        /* Add other styles as needed */
+    }
+}
