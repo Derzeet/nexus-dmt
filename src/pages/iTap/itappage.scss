@@ -1,13 +1,72 @@
 .itap-tool-wraper {
-    display: flex;
-    flex-direction: row;
+    height: 100vh; /* Full viewport height */
+    position: relative;
 
-    .left-bar {
-        width: 400px; /* Fixed width */
-        /* Add other styles as needed */
+    .left-bar-container-button {
+        position: absolute;
+        z-index: 1;
+        height: 100%; /* Full height */
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        .left-bar-container {
+            width: 400px; /* Fixed width */
+            border-right: 1px solid #BEBEBE;
+            background: #F2F0EE;
+            overflow: hidden;
+            transition: all 0.2s ease;
+
+            &.closed {
+                width: 0;
+                overflow: hidden;
+            }
+        }
+        
+        .open-lb-button {
+            cursor: pointer;
+
+            width: 10px;
+
+            display: flex; // Use flexbox
+            align-items: center; // Align items vertically in the center
+            justify-content: center; // Center horizontally if needed
+            .default-svg {
+                &.opened, &.closed {
+                    display: block; // Show by default
+                }
+            }
+            
+            
+            
+            .hidden-svg {
+                display: none; // Hide by default
+            }
+        
+            
+            &:hover {
+                svg {
+                    // position: absolute;
+                    opacity: 1;
+                    transition: all 0.2s ease;
+                    
+                }
+            }
+            svg {
+                opacity: 0.4;
+        
+
+                // &.wide {
+                //     margin-left: -5px;
+                // }
+            }
+        }
+        
+
     }
+    
     .graph-container {
-        flex-grow: 1; /* Fill the remaining space */
+        flex-grow: 1; /* Take remaining space */
+        height: 100%; /* Full height */
         /* Add other styles as needed */
     }
 }

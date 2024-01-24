@@ -67,6 +67,7 @@ function Graph({nodes, links}) {
 
 
     return (
+        <>
         <ForceGraph2D
             graphData={graphData}
             onNodeDragStart={handleNodeDragStart}
@@ -75,13 +76,13 @@ function Graph({nodes, links}) {
             backgroundColor="white"
             linkWidth={2} // Makes links more visible
             nodeLabel="name"
-          
+            
             linkCurvature={0}
             nodeCanvasObject={(node, ctx, globalScale) => {
                 const fontSize = 10;
                 ctx.font = `${fontSize}px Sans-Serif`;
                 const padding = 10;
-
+                
                 // Prepare text lines from node properties
                 const lines = [
                     `Name: ${node.name}`,
@@ -93,9 +94,9 @@ function Graph({nodes, links}) {
                 const textHeight = lineHeight * lines.length;
                 const rectWidth = Math.max(...lines.map(line => ctx.measureText(line).width)) + padding * 2;
                 const rectHeight = textHeight + padding * 2;
-
+                
                 const color = highlightNodes.current.has(node) ? 'orange' : node.color;
-
+                
                 // Function to draw rounded rectangle
                 const drawRoundedRect = (x, y, width, height, radius) => {
                     ctx.beginPath();
@@ -110,7 +111,7 @@ function Graph({nodes, links}) {
                     ctx.quadraticCurveTo(x, y, x + radius, y);
                     ctx.closePath();
                 };
-            
+                
                 ctx.fillStyle = color;
                 drawRoundedRect(node.x - rectWidth / 2, node.y - rectHeight / 2, rectWidth, rectHeight, 5); // 5 is borderRadius
                 ctx.fill();
@@ -118,13 +119,13 @@ function Graph({nodes, links}) {
                 ctx.lineWidth = 1;
                 drawRoundedRect(node.x - rectWidth / 2, node.y - rectHeight / 2, rectWidth, rectHeight, 5);
                 ctx.stroke();
-
+                
                 // Draw the text lines
                 ctx.textAlign = 'left';
                 ctx.textBaseline = 'bottom';
                 ctx.fillStyle = 'black';
                 const textStartX = node.x - rectWidth / 2 + padding; // Adjust x to start from the left side of the rectangle
-
+                
                 lines.forEach((line, i) => {
                     const textY = node.y - textHeight / 2 + lineHeight * (i + 0.5) + padding / 2;
                     ctx.fillText(line, textStartX, textY); // Use textStartX for the x-coordinate
@@ -134,7 +135,7 @@ function Graph({nodes, links}) {
             linkCanvasObject={(link, ctx, globalScale) => {
                 const start = link.source;
                 const end = link.target;
-            
+                
                 // Draw line for the link
                 ctx.beginPath();
                 ctx.moveTo(start.x, start.y);
@@ -142,17 +143,17 @@ function Graph({nodes, links}) {
                 ctx.strokeStyle = highlightLinks.current.has(link) ? 'red' : 'black'; // Default color if not specified
                 ctx.lineWidth = globalScale > 1 ? 1 / globalScale : 1; // Adjust line width for zoom
                 ctx.stroke();
-            
+                
                 // Calculate the middle point for the label
                 const middleX = (start.x + end.x) / 2;
                 const middleY = (start.y + end.y) / 2;
             
                 // Calculate the angle of the line (in radians)
                 const angle = Math.atan2(end.y - start.y, end.x - start.x);
-            
+                
                 // Set label color
                 const labelColor = highlightLinks.current.has(link) ? 'red' : 'black';
-            
+                
                 // Save the current context, then rotate and draw the label
                 ctx.save();
                 ctx.translate(middleX, middleY);
@@ -175,7 +176,8 @@ function Graph({nodes, links}) {
                 ctx.fill();
             }}
             
-        />
+            />
+        </>
     );
 }
 

@@ -1,8 +1,11 @@
+import './genericInput.scss'
+
+
 function GenericInput({ label, type, options, value, onChange }) {
     const renderInput = () => {
         switch (type) {
             case 'text':
-                return <input type="text" value={value} onChange={e => onChange(e.target.value)} />;
+                return <input type="text" placeholder={label} value={value} onChange={e => onChange(e.target.value)} />;
             case 'number':
                 return <input type="number" value={value} onChange={e => onChange(e.target.value)} />;
             case 'select':
@@ -22,7 +25,10 @@ function GenericInput({ label, type, options, value, onChange }) {
 
     return (
         <div className="one-line-input">
+            {label ? 
             <label>{label}</label>
+            : null
+            }
             {renderInput()}
         </div>
     );
