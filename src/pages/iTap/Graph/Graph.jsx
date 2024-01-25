@@ -4,6 +4,7 @@ import { ForceGraph2D } from 'react-force-graph';
 function Graph({nodes, links}) {
     const highlightNodes = useRef(new Set());
     const highlightLinks = useRef(new Set());
+    const forceRef = useRef(null);
 
     const [graphData, setGraphData] = useState({ nodes, links });
     const [simulationEnabled, setSimulationEnabled] = useState(true);
@@ -21,7 +22,11 @@ function Graph({nodes, links}) {
 
         setGraphData({ nodes: updatedNodes, links: graphData.links });
     }, []); // Run only once after the first render
-
+    useEffect(() => {
+        forceRef.current.d3Force("charge").strength(-6200);
+        // forceRef.current.d3Force("center").strength(7);
+        // forceRef.current.d3Force("link").strength(3);
+    });
     const handleNodeDragStart = node => {
         // Unfreeze the node being dragged
         node.fx = null;
@@ -76,7 +81,8 @@ function Graph({nodes, links}) {
             backgroundColor="white"
             linkWidth={2} // Makes links more visible
             nodeLabel="name"
-            
+            ref={forceRef}
+
             linkCurvature={0}
             nodeCanvasObject={(node, ctx, globalScale) => {
                 const fontSize = 10;
@@ -175,6 +181,12 @@ function Graph({nodes, links}) {
                 ctx.fillStyle = color; // Invisible but catchable area
                 ctx.fill();
             }}
+            // d3Force={(forceName, forceFn) => {
+            //     if (forceName === 'charge') {
+            //         // Replace with your custom force logic
+            //         return forceFn.strength(0);
+            //     }
+            // }}
             
             />
         </>

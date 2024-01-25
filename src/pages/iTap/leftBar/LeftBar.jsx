@@ -1,13 +1,17 @@
 
 import React, { useState } from 'react'
 import './leftbar.scss'
-import GenericInput from '../components/GenericInput/genericInput'
 import './spinner.scss'
+
+import GenericInput from '../components/GenericInput/genericInput'
+import CompactLogs from './compactLogs/CompactLogs'
+import allRelations from '../../../data/Relations'
 
 //icons
 import regularIcon from '../images/refularIcon.svg'
 import zagsIcon from '../images/zagsIcon.svg'
 import historyIcon from '../images/searchIcon.svg'
+import { setRef } from '@mui/material'
 
 function LeftBar() {
     const [lbState, setLbState] = useState("regular")
@@ -32,6 +36,8 @@ function LeftBar() {
     const [fname2, setFname2] = useState('')
     const [sname2, setSname2] = useState('')
     const [mfname2, setMname2] = useState('')
+
+    const [relations, setRelations] = useState([])
 
     //Graph
     const [limit, setLimit] = useState(20)
@@ -58,6 +64,7 @@ function LeftBar() {
         setDepth(1)
         setLimit(20)
     }
+
 
 
     return (
@@ -321,14 +328,18 @@ function LeftBar() {
                                 value={depth} 
                                 onChange={setDepth} 
                                 />
+                            <GenericInput 
+                                label="Связи" 
+                                type="chip-selecter" 
+                                options={allRelations}
+                                value={relations} 
+                                onChange={setRelations} 
+                            />
                         </div>
                 </div>
                 : lbState == 'history' ?
                 <div className="inputs">
-                    <div className="history-loader-wrapper">
-                        <span class="history-loader"></span>
-                        <a>Подождите...</a>
-                    </div>
+                    <CompactLogs />
                 </div>
                 : null
                 }

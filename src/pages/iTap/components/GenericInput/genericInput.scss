@@ -26,6 +26,45 @@
         background: rgba(0, 0, 0, 0.11);
         color: #1a1a1a;
     }
+    .choose-all {
+        cursor: pointer;
+        border: 1px solid #33B6FF;
+        border-radius: 9px;
+        padding: 10px;
+        background: none;
+        color: #33B6FF;
+        font-weight: 500;
+        margin-top: 15px;
+        
+        &:hover {
+            background: #33b8ff23;
+            
+        }
+    }
+    .chip-container {
+        margin-top: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    
+    .chip {
+        padding: 5px 10px;
+        border: 1px solid #ccc;
+        border-radius: 9px;
+        cursor: pointer;
+
+        text-align: left;
+    }
+    
+    .chip.selected {
+        background-color: #33B6FF;
+        color: white;
+        border-color: #33B6FF;
+    }
+    
+    /* Additional styling as needed */
+    
     
     input {
         font-family: 'Ubuntu';
