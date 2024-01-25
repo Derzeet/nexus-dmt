@@ -23,7 +23,7 @@ function Graph({nodes, links}) {
         setGraphData({ nodes: updatedNodes, links: graphData.links });
     }, []); // Run only once after the first render
     useEffect(() => {
-        forceRef.current.d3Force("charge").strength(-6200);
+        forceRef.current.d3Force("charge").strength(-5200);
         // forceRef.current.d3Force("center").strength(7);
         // forceRef.current.d3Force("link").strength(3);
     });
@@ -79,7 +79,7 @@ function Graph({nodes, links}) {
             onNodeDragEnd={handleNodeDragEnd}            
             nodeAutoColorBy="color"
             backgroundColor="white"
-            linkWidth={2} // Makes links more visible
+            // linkWidth={2} // Makes links more visible
             nodeLabel="name"
             ref={forceRef}
 
