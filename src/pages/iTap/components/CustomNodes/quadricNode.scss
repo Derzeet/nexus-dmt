@@ -1,0 +1,23 @@
+.quadric-node {
+    background-color: #50815A;
+
+    padding: 11px;
+    border-radius: 9px;
+
+
+    .node-header {
+        padding-bottom: 5px;
+        text-align: left;
+        color: white;
+        font-weight: 500;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    }
+    
+    .node-body {
+        color: white;
+        font-weight: 300;
+        padding-top: 5px;
+        
+        text-align: left;
+    }
+}

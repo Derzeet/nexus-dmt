@@ -4,17 +4,25 @@ import Graph from "./Graph/Graph"
 import LeftBar from "./leftBar/LeftBar"
 
 import './itappage.scss'
+import VisGraph from "./Graph/VisGraph"
+import N4JDiagram from "./Graph/Diragram"
 
 function ITapPage() {
     const [lbOpened, setLbOpened] = useState(true)
     
     const nodes = [
-        { id: 'node1', name: 'Node 1', color: 'red' },
-        { id: 'node2', name: 'Nodasd', color: 'red' },
-        { id: 'node3', name: 'Node 1', color: 'red' },
-        { id: 'node8', name: 'Node 1', color: 'red' },
-        { id: 'node12', name: 'Node 2', color: 'green' },
-        { id: 'node11', name: 'Node 3', color: 'blue' }
+        { id: 1, name: 'Node 1', widthConstraint: { minimum: 200 },
+        label: "1 This node has a mimimum width", color: 'red' },
+        { id: 2, name: 'Nodasd', widthConstraint: { minimum: 120 },
+        label: "2 This node has a mimimum width", color: 'red' },
+        { id: 3, name: 'Node 1', widthConstraint: { minimum: 120 },
+        label: "3 This node has a mimimum width", color: 'red' },
+        { id: 4, name: 'Node 1', widthConstraint: { minimum: 120 },
+        label: "4 This node has a mimimum width",color: 'red' },
+        { id: 5, name: 'Node 2', widthConstraint: { minimum: 120 },
+        label: "5 This node has a mimimum width", color: 'green' },
+        { id: 6, name: 'Node 3', widthConstraint: { minimum: 120 },
+        label: "6 This node has a mimimum width",color: 'yellow' }
     ];
 
     const links = [
@@ -24,6 +32,14 @@ function ITapPage() {
         { source: 'node1', target: 'node8', color: 'black', label: 'DIRECTOR' },
         { source: 'node2', target: 'node11', color: 'black', label: 'DIRECTOR' },
         { source: 'node12', target: 'node1', color: 'black', label: 'DIRECTOR' }
+    ];
+    const linksVis = [
+        { id: 11, from: 1, to: 2, color: 'black', label: 'DIRECTOR' },
+        { id: 12,from: 1, to: 3, color: 'black', label: 'DIRECTOR' },
+        { id: 13, from: 1, to: 4, color: 'black', label: 'DIRECTOR' },
+        { id: 14 ,from: 3, to: 5, color: 'black', label: 'DIRECTOR' },
+        { id: 15,from: 3, to: 6, color: 'black', label: 'DIRECTOR' },
+        { id: 16,from: 6, to: 5, color: 'black', label: 'DIRECTOR' }
     ];
     
     return (
@@ -44,7 +60,9 @@ function ITapPage() {
 
                 </div>
                 <div className="graph-container">
-                    <Graph nodes={nodes} links={links}/>
+                    {/* <Graph nodes={nodes} links={links}/> */}
+                    {/* <VisGraph nodes={nodes} edges={linksVis}/> */}
+                    <N4JDiagram />
                 </div>
             </div>
         </>
