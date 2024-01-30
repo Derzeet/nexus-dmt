@@ -11,6 +11,7 @@ import ReactFlow, {
 import {nodes as initialNodes, edges as initialEdges} from '../samles/initial-elements'
 import CustomNode from "../samles/CustomNode";
 import quadricNode from "../components/CustomNodes/quadricNode";
+import companyNode from "../components/CustomNodes/companyNode";
 
 import 'reactflow/dist/style.css';
 import '../samles/overview.css'
@@ -19,6 +20,7 @@ import assignGridPositions from "../functions/AssignGridPositions";
 
 
 const nodeTypes = {
+    company: companyNode,
     person: quadricNode,
     custom: CustomNode,
   };

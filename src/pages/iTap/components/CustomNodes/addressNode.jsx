@@ -3,7 +3,7 @@ import { Handle, Position } from 'reactflow';
 
 import './quadricNode.scss'
 
-function QuadricNode({ id, data }) {
+function AddressNode({ id, data }) {
   return (
     <div className='quadric-node' style={{backgroundColor: "#97C30A"}}>
       <Handle
@@ -28,4 +28,4 @@ function QuadricNode({ id, data }) {
   );
 }
 
-export default memo(QuadricNode);
+export default memo(AddressNode);
