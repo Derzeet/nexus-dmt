@@ -7,10 +7,13 @@ import editIcon from '../../images/editIcon.svg'
 
 
 import './quadricNode.scss'
+import { hover } from '@testing-library/user-event/dist/hover';
 
 function CompanyNode({ id, data }) {
     const [keys, setKeys] = useState(Object.keys(data))
     const [visibleKeys, setVisibleKeys] = useState(['IINBIN'])
+
+    const [hoverState, setHoverState] = useState('')
 
 
     const handlePropertyChange = (x) => {
@@ -24,6 +27,7 @@ function CompanyNode({ id, data }) {
             }
         });
     }
+
 
     return (
         <div className='quadric-node' style={{backgroundColor: "#0A84C3"}}>
@@ -50,27 +54,41 @@ function CompanyNode({ id, data }) {
                 style={{ background: '#555' }}
             />
             <div className='node-tools-bar'>
-                {/* <img src={editIcon} alt='edit'/>
-                <img src={plusIcon} alt='add'/>
-                <img src={trashIcon} alt='delete'/> */}
-                <div className='edit-node-properties'>
-                    <h1>Показать поля</h1>
-                    <div className="list-of-properties">
-                        {keys.map(x => {
-                            return (
-                                <div className='prop-vision'>
-                                    <input type="checkbox" onChange={() => handlePropertyChange(x)} name="" id="" checked={visibleKeys.includes(x)} />
-                                    <a>{x}</a>
-                                </div>
-                            )
-                        })}
+                {hoverState == '' ? 
+                    <>
+                        <img src={editIcon} alt='edit' onClick={() => setHoverState('edit')}/>
+                        <img src={plusIcon} alt='add'  onClick={() => setHoverState('add')}/>
+                        <img src={trashIcon} alt='delete'/>
+                    </>
+                    :
+                    hoverState == 'edit' ? 
+                    <div className='edit-node-properties' onMouseLeave={() => setHoverState('')}>
+                        <h1>Показать поля</h1>
+                        <div 
+                            className="list-of-properties" 
+                            
+                            >
+                            {keys.map(x => {
+                                return (
+                                    <div className='prop-vision'>
+                                        <input type="checkbox" onChange={() => handlePropertyChange(x)} name="" id="" checked={visibleKeys.includes(x)} />
+                                        <a>{x}</a>
+                                    </div>
+                                )
+                            })}
 
+                        </div>
+                        <div className='edit-node-footer'>
+                            <img src={plusIcon} alt="+" />
+                            <a>Добавить текст</a>
+                        </div>
                     </div>
-                    <div className='edit-node-footer'>
-                        <img src={plusIcon} alt="+" />
-                        <a>Добавить текст</a>
+                    : hoverState == 'add' ? 
+                    <div className='edit-node-properties' onMouseLeave={() => setHoverState('')}>
+                        
                     </div>
-                </div>
+                    : null
+                }
             </div>
         </div>
     );

@@ -1,7 +1,7 @@
 .quadric-node {
 
-    padding: 11px;
-    border-radius: 9px;
+    padding: 9px;
+    border-radius: 7px;
 
     position: relative;
     &:hover {
@@ -41,9 +41,10 @@
         display: none;
         flex-direction: row;
         gap: 2px;
-        right: -90px;
+        margin-left: 80%;
+        // right: calc(- 200%);
         top: -10px;
-
+        
         > img {
             cursor: pointer;
             filter: invert(1);
@@ -53,16 +54,20 @@
                 opacity: 0.7;
             }
         }
-
+        transition: all 0.2s ease;
         .edit-node-properties {
             padding: 10px;
             // display: flex;
             h1 {
+                text-align: left;
+                color: #828282;
                 font-size: 11px;
+                font-weight: 500;
+                
             }
             .list-of-properties {
-                height: 200px;
-                overflow: scroll;
+                max-height: 200px; 
+                overflow-y: scroll;
                 display: flex;
                 flex-direction: column;
                 gap: 5px;

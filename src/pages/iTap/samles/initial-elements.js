@@ -123,6 +123,7 @@ export const edges = [
     target: '5',
     type: 'smoothstep',
     sourceHandle: 'handle-0',
+    color: 'red',
     data: {
       selectIndex: 0,
     },
