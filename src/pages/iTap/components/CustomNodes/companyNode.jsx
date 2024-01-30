@@ -1,79 +1,105 @@
-import React, { memo, useState } from 'react';
-import { Handle, Position } from 'reactflow';
+import React, { memo, useState } from "react";
+import { Handle, Position } from "reactflow";
 
-import plusIcon from '../../images/plucIcon.svg'
-import trashIcon from '../../images/trashIcon.svg'
-import editIcon from '../../images/editIcon.svg'
+import plusIcon from "../../images/plucIcon.svg";
+import trashIcon from "../../images/trashIcon.svg";
+import editIcon from "../../images/editIcon.svg";
 
-
-import './quadricNode.scss'
+import './quadricNode.scss';
 
 function CompanyNode({ id, data }) {
-    const [keys, setKeys] = useState(Object.keys(data))
-    const [visibleKeys, setVisibleKeys] = useState(['IINBIN'])
+  const [keys, setKeys] = useState(Object.keys(data));
+  const [visibleKeys, setVisibleKeys] = useState(["IINBIN"]);
+  const [isTextBoxOpen, setIsTextBoxOpen] = useState(false);
+  const [textboxValue, setTextboxValue] = useState("");
+  const [note, setNote] = useState(""); // Add a new state for the note
+  const [displayText, setDisplayText] = useState(data.customText || "");
 
+  const handlePropertyChange = (x) => {
+    setVisibleKeys((prevKeys) => {
+      if (prevKeys.includes(x)) {
+        return prevKeys.filter((y) => y !== x);
+      } else {
+        return [...prevKeys, x];
+      }
+    });
+  };
 
-    const handlePropertyChange = (x) => {
-        setVisibleKeys(prevKeys => {
-            if (prevKeys.includes(x)) {
-                // Remove x from the array
-                return prevKeys.filter(y => y !== x);
-            } else {
-                // Add x to the array
-                return [...prevKeys, x];
-            }
-        });
+  const handleAddTextClick = () => {
+    setIsTextBoxOpen(!isTextBoxOpen);
+  };
+
+  const handleSaveText = () => {
+    if (isTextBoxOpen) {
+      setDisplayText(textboxValue);
+      setIsTextBoxOpen(false);
+    } else {
+      setNote(textboxValue); // Save the textboxValue as a note
+      setIsTextBoxOpen(true); // Open the textbox for editing the note
     }
+  };
 
-    return (
-        <div className='quadric-node' style={{backgroundColor: "#0A84C3"}}>
-            <Handle
-                type="target"
-                position={Position.Top}
-                style={{ background: '#555' }}
-                onConnect={(params) => console.log('handle onConnect', params)}
-            />
-            <div className="node-header">
-                {data.Name}
+  return (
+    <div className="quadric-node" style={{ backgroundColor: "#0A84C3" }}>
+      <Handle
+        type="target"
+        position={Position.Top}
+        style={{ background: "#555" }}
+        onConnect={(params) => console.log("handle onConnect", params)}
+      />
+      <div className="node-header">{data.Name}</div>
+      <div className="node-body">
+        {visibleKeys.map((x) => (
+          <a key={x}>
+            {x}: {data[x]}
+          </a>
+        ))}
+        {note && <div className="note">{note}</div>}
+        {displayText && <div>{displayText}</div>}
+      </div>
+      <Handle
+        type="source"
+        position={Position.Bottom}
+        id="a"
+        style={{ background: "#555" }}
+      />
+      <div className="node-tools-bar">
+        <div className="edit-node-properties">
+          <h1>Показать поля</h1>
+          <div className="list-of-properties">
+            {keys.map((x) => (
+              <div className="prop-vision" key={x}>
+                <input
+                  type="checkbox"
+                  onChange={() => handlePropertyChange(x)}
+                  checked={visibleKeys.includes(x)}
+                />
+                <a>{x}</a>
+              </div>
+            ))}
+          </div>
+          <div>
+            <div className="edit-node-footer">
+              <img src={plusIcon} alt="+" />
+              <a onClick={handleAddTextClick}>Добавить текст</a>
             </div>
-            <div className="node-body">
-                {visibleKeys.map(x => {
-                    return (
-                        <a>{x}: {data[x]}</a>
-                    )
-                })}
-            </div>
-            <Handle
-                type="source"
-                position={Position.Bottom}
-                id="a"
-                style={{ background: '#555' }}
-            />
-            <div className='node-tools-bar'>
-                {/* <img src={editIcon} alt='edit'/>
-                <img src={plusIcon} alt='add'/>
-                <img src={trashIcon} alt='delete'/> */}
-                <div className='edit-node-properties'>
-                    <h1>Показать поля</h1>
-                    <div className="list-of-properties">
-                        {keys.map(x => {
-                            return (
-                                <div className='prop-vision'>
-                                    <input type="checkbox" onChange={() => handlePropertyChange(x)} name="" id="" checked={visibleKeys.includes(x)} />
-                                    <a>{x}</a>
-                                </div>
-                            )
-                        })}
-
-                    </div>
-                    <div className='edit-node-footer'>
-                        <img src={plusIcon} alt="+" />
-                        <a>Добавить текст</a>
-                    </div>
-                </div>
-            </div>
+            {isTextBoxOpen && (
+              <div>
+                <input
+                  className="input-note"
+                  value={textboxValue}
+                  onChange={(e) => setTextboxValue(e.target.value)}
+                />
+                <button onClick={handleSaveText}>
+                  {note ? "Изменить" : "Добавить"}
+                </button>
+              </div>
+            )}
+          </div>
         </div>
-    );
+      </div>
+    </div>
+  );
 }
 
 export default memo(CompanyNode);
