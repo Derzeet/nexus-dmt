@@ -58,7 +58,7 @@ function N4JDiagram() {
     
     const handleModalSubmit = (label) => {
         // Create the edge with the label and add it
-        const newEdge = { ...pendingConnection, label };
+        const newEdge = { ...pendingConnection, label,  type: 'smoothstep' };
         setEdges((eds) => addEdge(newEdge, eds));
         
         // Close the modal
@@ -69,9 +69,9 @@ function N4JDiagram() {
     // we are using a bit of a shortcut here to adjust the edge type
     // this could also be done with a custom edge for example
     const edgesWithUpdatedTypes = edges.map((edge) => {
-        if (edge.sourceHandle) {
-        const edgeType = nodes.find((node) => node.type === 'custom').data.selects[edge.sourceHandle];
-        edge.type = edgeType;
+        if (edge.sourceHandle && !edge.type) {
+            const edgeType = nodes.find((node) => node.type === 'custom').data.selects[edge.sourceHandle];
+            edge.type = edgeType;
         }
 
         return edge;
