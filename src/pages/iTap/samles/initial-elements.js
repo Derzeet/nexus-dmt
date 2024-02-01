@@ -4,8 +4,9 @@ import { MarkerType, Position } from 'reactflow';
 export const nodes = [
   {
     id: '1',
-    type: 'person',
+    type: 'quadric',
     data: {
+        'type': 'person',
         "Nation": "ҚАЗАҚ",
         "Death_Status": null,
         "Buhgalter": null,
@@ -27,7 +28,7 @@ export const nodes = [
         "Rozisk": null,
         "Citizenship": "ҚАЗАҚСТАН",
         "Status_Minzdrav": null,
-        "FIO": "ОСМАН",
+        "FIO": "ОСМАН FFD",
         "IIN": "793238",
         "Doljnik": null,
         "Family": "",
@@ -35,11 +36,12 @@ export const nodes = [
         "DeadlinePassed": null
     },
     // position: { x: 250, y: 0 },
-  },
-  {
+},
+{
     id: '2',
-    type: 'company',
+    type: 'quadric',
     data: {
+        'type': 'company',
         "Status": null,
         "IINBIN": "462643",
         "Buhgalter": null,
@@ -115,13 +117,23 @@ export const nodes = [
 ];
 
 export const edges = [
-  { id: 'e1-2', type: 'smoothstep', source: '1', target: '2', label: 'this is an edge label' },
-  { id: 'e1-3', type: 'smoothstep', source: '1', target: '3', animated: true },
+  { id: 'e1-2', type: 'quadric', 
+  data: { curvature: 0.5, label: "Edge from A to B" }, // Ensure each edge has a `data` property
+  offset: 1, source: '1', target: '2', label: 'this is an edge label' },
+  { id: 'e1-24', type: 'quadric', 
+  data: { curvature: 0.5, label: "Edge from A to B" }, // Ensure each edge has a `data` property
+  offset: 1, source: '1', target: '2', label: 'this is an edge asdasd' },
+  { id: 'e1-23', type: 'quadric', 
+  data: { curvature: 0.5, label: "Edge from A to B" }, // Ensure each edge has a `data` property
+  offset: 3, source: '1', target: '2', label: 'this is an edge labelasdasdasd' },
+  { id: 'e1-3', type: 'quadric',
+  data: { curvature: 0.5, label: "Edge from A to B" },
+  source: '1', target: '3', animated: true },
   {
     id: 'e4-5',
     source: '4',
     target: '5',
-    type: 'smoothstep',
+    type: 'quadric',
     sourceHandle: 'handle-0',
     color: 'red',
     data: {
@@ -135,7 +147,7 @@ export const edges = [
     id: 'e4-6',
     source: '4',
     target: '6',
-    type: 'smoothstep',
+    type: 'quadric',
     sourceHandle: 'handle-1',
     data: {
       selectIndex: 1,

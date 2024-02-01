@@ -1,7 +1,15 @@
+*,
+*::before,
+*::after { 
+  box-sizing: border-box;
+}
+
 .quadric-node {
 
     padding: 9px;
     border-radius: 7px;
+
+    max-width: 300px;
 
     position: relative;
     &:hover {
@@ -12,10 +20,28 @@
     }
     .node-header {
         padding-bottom: 5px;
-        text-align: left;
-        color: white;
-        font-weight: 500;
         border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+        .rendered-label-input {
+            font-family: Ubuntu;
+            min-width: 100px;
+            max-width: 300px;          /* Sets the width to 100% of its container */
+            min-height: 20px;     /* Minimum height for one line of text */
+            height: auto;         /* Height auto-adjusts to the content */
+            max-width: 300px;     /* Maximum width constraint */
+            text-align: left;
+            color: white;
+            font-weight: 500;
+            background: none;
+            border: none;
+            resize: none;         /* No manual resize handle */
+            overflow: hidden;     /* Hide overflow */
+            line-height: 1;     /* Line height for text */
+            box-sizing: border-box; /* Include padding in width calculation */
+          
+            &:focus {
+              outline: none;      /* No focus outline */
+            }
+        }
     }
     
     .node-body {
@@ -33,6 +59,7 @@
         cursor: default;
         background-color: #F2F0EE;
         border: 1px solid #BEBEBE;
+        width: max-content;
         border-radius: 5px;
 
         padding: 0px 5px 0 5px;
