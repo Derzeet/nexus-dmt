@@ -9,13 +9,13 @@ function SetEdgeLabelModal({onSubmit, onClose}) {
     return (
         <div className="edge-label-set-modal">
             <div className="modal-header">
-                <h1>asdasd</h1>
+                <h1>Создать объект</h1>
                 <img src={closeIcon} onClick={onClose} alt=''/>
             </div>
             <div className="modal-body">
                 <div className='label'>
-                    <input type="text" value={label} onChange={(e) => {setLabel(e.target.value)}} name="" id="" />
                     <label htmlFor="">Введите текст</label>
+                    <input type="text" value={label} onChange={(e) => {setLabel(e.target.value)}} name="" id="" />
                 </div>
                 {/* <div className='label'>
                     <input type="color" name="" id="" />

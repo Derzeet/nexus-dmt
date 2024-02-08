@@ -12,7 +12,7 @@ import { hover } from '@testing-library/user-event/dist/hover';
 function QuadricNode({ id, data }) {
     const { onDeleteNode, createNodeAndConnect, setZoomOnScroll, color, type } = data;
 
-    const [renderedLabel, setRenderedLabel] = useState(type == 'person' ? data.FIO : type == 'company' ? data.Name : type == 'created' ? data.Name : 'address')
+    const [renderedLabel, setRenderedLabel] = useState(type == 'person' ? data.FIO : type == 'company' ? data.Name : type == 'address' ? data.Adress : type == 'created' ? data.Name : 'address')
 
     const [colorBasedOnType, setColorBasedOnType] = useState(color ? color : type == 'company' ? "#0A84C3" : type == 'person' ? "#97C30A" : type == 'address' ? '#F5A623' : '#0A84C3')
 
@@ -36,14 +36,19 @@ function QuadricNode({ id, data }) {
             }
         });
     }
-
+    const handleStyle = {
+        width: '6px', // Increase the width
+        height: '6px', // Increase the height
+        background: '#555',
+        zIndex: 10 // Ensure the handle is above other elements for interaction
+    };
 
     return (
         <div className='quadric-node' style={{backgroundColor: colorBasedOnType}}>
             <Handle
-                type="target"
-                position={Position.Top}
-                style={{ background: '#555' }}
+                type="source"
+                position={Position.Left}
+                style={handleStyle} // Apply the custom style
                 onConnect={(params) => console.log('handle onConnect', params)}
             />
             <div className="node-header">
@@ -76,10 +81,10 @@ function QuadricNode({ id, data }) {
                 })}
             </div>
             <Handle
-                type="source"
-                position={Position.Bottom}
+                type="target"
+                position={Position.Right}
                 id="a"
-                style={{ background: '#555' }}
+                style={handleStyle} // Apply the custom style
             />
             <div className='node-tools-bar'>
                 {hoverState == '' ? 

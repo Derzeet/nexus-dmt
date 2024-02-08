@@ -1,6 +1,7 @@
 .left-bar {
-    width: 360px;
-    padding-top: 20px;
+    height: calc(100vh - 80px);
+    width: 390px;
+    padding-top: 10px;
     padding-left: 20px;
     padding-right: 20px;
     display: flex;
@@ -21,9 +22,9 @@
         }
         > button {
             cursor: pointer;
-            color: #33B6FF;
+            color: #1b376f;
             font-weight: 500;
-            border: 1px solid #33B6FF;
+            border: 1px solid #1b376f;
             border-top: none;
             padding: 10px;
             width: 100%;
@@ -34,7 +35,7 @@
             align-items: center;
 
             &:hover {
-                background-color: #33b8ff23;
+                background-color: #1b376f25;
             }
         }
         > div {
@@ -48,12 +49,12 @@
                 justify-content: center;
                 align-items: center;
                 font-weight: 500;
-                color: #33B6FF;
+                color: #1b376f;
                 width: 100%;
                 padding: 10px;
-                border: 1px solid #33B6FF;
+                border: 1px solid #1b376f;
                 &:hover {
-                    background-color: #33b8ff23;
+                    background-color: #1b376f25;
                 }
             }
             .regular {
@@ -68,7 +69,7 @@
     }
     
     .inputs {
-        height: calc(100vh - 300px);
+        height: calc(100vh - 280px);
 
         padding-top: 20px;
         padding-right: 8px;
@@ -171,9 +172,9 @@
                 }
             }
             &.submit {
-                background: #33b8ffad;
+                background: #1b376f;
                 &:hover {
-                    background: #33B6FF;
+                    background: #1b376fb7;
                     
                 }
 

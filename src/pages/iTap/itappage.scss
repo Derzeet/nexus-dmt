@@ -1,5 +1,5 @@
 .itap-tool-wraper {
-    height: 100vh; /* Full viewport height */
+    height: calc(100vh - 80px); /* Full viewport height */
     position: relative;
 
     .left-bar-container-button {

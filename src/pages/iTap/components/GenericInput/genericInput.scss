@@ -28,16 +28,16 @@
     }
     .choose-all {
         cursor: pointer;
-        border: 1px solid #33B6FF;
+        border: 1px solid #1b376f;
         border-radius: 9px;
         padding: 10px;
         background: none;
-        color: #33B6FF;
+        color: #1b376f;
         font-weight: 500;
         margin-top: 15px;
         
         &:hover {
-            background: #33b8ff23;
+            background: #1b376f44;
             
         }
     }
@@ -50,17 +50,18 @@
     
     .chip {
         padding: 5px 10px;
-        border: 1px solid #ccc;
+        border: 1px solid #1b376f91;
         border-radius: 9px;
         cursor: pointer;
 
         text-align: left;
+        color: #1b376f91;
     }
     
     .chip.selected {
-        background-color: #33B6FF;
+        background-color: #1b376f;
         color: white;
-        border-color: #33B6FF;
+        border-color: #1b376f;
     }
     
     /* Additional styling as needed */

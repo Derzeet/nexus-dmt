@@ -9,10 +9,15 @@ import ReactFlow, {
     useEdgesState,
 } from 'reactflow';
 
-import {nodes as initialNodes, edges as initialEdges} from '../samles/initial-elements'
+import transformDataForReactFlow from "../functions/transformDataForReactFlow";
+
+import response from "../samles/apiResponseExample";
+
 import CustomNode from "../samles/CustomNode";
 import QuadricNode from "../components/CustomNodes/QuadricNode";
+import relationNode from "../components/CustomNodes/relationNode";
 import SetEdgeLabelModal from "../components/EdgeLabelSetterModal/setEdgeLabelModal";
+
 
 import CustomEdge from "../components/CustomEdges/CustomEdge";
 
@@ -25,6 +30,7 @@ import generateUniqueId from "../functions/createUniqueIdGenerator";
 const nodeTypes = {
     quadric: QuadricNode,
     custom: CustomNode,
+    edgeNode: relationNode
 };
 
 const edgeTypes = {
@@ -39,10 +45,10 @@ const onInit = (reactFlowInstance) => console.log('flow loaded:', reactFlowInsta
   
 
 function N4JDiagram() {
-
+    const { initialNodes, initialEdges } = transformDataForReactFlow(response);
     const edgeUpdateSuccessful = useRef(true);
 
-    const [nodes, setNodes, onNodesChange] = useNodesState(assignGridPositions(initialNodes, 300, 400, 50, 50));
+    const [nodes, setNodes, onNodesChange] = useNodesState(assignGridPositions(initialNodes, '31102458', 0, 0, 600, 100));
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
     const [zoomOnScroll, setZoomOnScroll] = useState(true);
 
@@ -91,8 +97,8 @@ function N4JDiagram() {
     
         const newEdge = {
             id: `e${sourceNodeId}-${newNodeId}`,
-            source: sourceNodeId,
-            target: newNodeId,
+            target: sourceNodeId,
+            source: newNodeId,
             data: { curvature: 3 + 12 },
             type: "smoothstep", // or any other type
             // additional edge properties as needed
